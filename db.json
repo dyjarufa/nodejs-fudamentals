@@ -1,1 +1,9 @@
-{"users":[{"name":"Louise","email":"lou@junior.com"}]}
+{
+  "users": [
+    {
+      "id": "a1dd4ac5-18a6-4a89-8cd3-c0c8f78acef6",
+      "name": "Benício",
+      "email": "ben@junior.com"
+    }
+  ]
+}
