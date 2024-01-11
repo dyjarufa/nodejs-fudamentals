@@ -1,0 +1,20 @@
+```js
+//ex: url: http://localhost:3333/users?search=Louise&page=2
+
+// '?search=Louise' => query.substr(1) => 'search=Louise' =>vai eliminar o primeiro carácter, pois o substr esta buscando a partir da posição [1]
+// [search=Louise&page=2] => .split('&') => [search='Louise', 'page=2]
+// param.split('=') => ['search', 'Louise'], ['page', '2']
+
+export function extractQueryParams(query) {
+  return query
+    .substr(1)
+    .split('&')
+    .reduce((queryParams, param) => {
+      const [key, value] = param.split('=')
+
+      queryParams[key] = value
+
+      return queryParams
+    }, {})
+}
+```

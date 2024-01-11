@@ -1,37 +1,27 @@
 import http from 'node:http'
 import { json } from './middlewares/json.js'
-import { Database } from './database.js'
-import { randomUUID } from 'node:crypto'
-
-const database = new Database()
+import { routes } from './routes.js'
+import { extractQueryParams } from './utils/extract-query-params.js'
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req
 
-  await json(req, res) //? middlewares => são interceptadores, que recebem o "req" e "res"
+  await json(req, res)
 
-  if (method === 'GET' && url === '/users') {
-    /* 
-      Posso também obter dados dos header do req(ex: req.headers) nesse caso enviados front-end para o backend
-    */
+  const route = routes.find((route) => {
+    return route.method === method && route.path.test(url)
+  })
 
-    const users = database.select('users')
+  if (route) {
+    const routeParams = req.url.match(route.path)
 
-    return res.end(JSON.stringify(users))
-  }
+    const { query, ...params } = routeParams.groups
 
-  if (method === 'POST' && url === '/users') {
-    const { name, email } = req.body
+    req.params = params
 
-    const user = {
-      id: randomUUID(),
-      name,
-      email,
-    }
+    req.query = query ? extractQueryParams(query) : {}
 
-    database.insert('users', user)
-
-    return res.writeHead(201).end()
+    return route.handler(req, res)
   }
 
   return res.writeHead(404).end()

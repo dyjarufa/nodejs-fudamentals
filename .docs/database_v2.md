@@ -1,3 +1,4 @@
+```js
 import fs from 'node:fs/promises'
 
 const databasePath = new URL('../db.json', import.meta.url)
@@ -18,6 +19,12 @@ export class Database {
   #persist() {
     fs.writeFile(databasePath, JSON.stringify(this.#database))
   }
+  /* 
+    Object.entries() ==> 
+    { name: Louise, email: lou } =  se receber um objeto nesse formato
+    será convertido para um array com array aninhado, possibilitando uma melhor forma de trabalhar com array:
+      [['name', 'Louise'], ['email', 'lou']]
+  */
 
   select(table, search) {
     let data = this.#database[table] ?? []
@@ -63,3 +70,4 @@ export class Database {
     }
   }
 }
+```

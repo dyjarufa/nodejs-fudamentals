@@ -1,9 +1,1 @@
-{
-  "users": [
-    {
-      "id": "a1dd4ac5-18a6-4a89-8cd3-c0c8f78acef6",
-      "name": "Benício",
-      "email": "ben@junior.com"
-    }
-  ]
-}
+{"users":[{"id":"74262f5f-81e7-4391-9c55-7cca74a5bee4","name":"Louise","email":"lou@baby.com"},{"id":"504ffff9-d179-4aa6-9d2c-f2295937ed58","name":"Benicio","email":"ben@jumior.com"},{"id":"95dea298-9838-4818-981e-27d4c5c0dbba","name":"Louise","email":"lou@baby.com"}]}
